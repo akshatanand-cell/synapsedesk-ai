@@ -25,9 +25,7 @@ import { agentEngine } from './agent.js';
 import { sound } from './audio.js';
 
 export const SynapseCoreTag = createComponent('SynapseCoreTag', {});
-export const SpatialNodeTag = createComponent('SpatialNodeTag', {
-  nodeIndex: { type: 'number', default: 0 },
-});
+export const SpatialNodeTag = createComponent('SpatialNodeTag', {});
 
 export class SynapseCoreSystem extends createSystem({
   cores: { required: [SynapseCoreTag] },
@@ -105,7 +103,7 @@ export class SynapseCoreSystem extends createSystem({
       mesh.position.set(x, y, z);
 
       nodeEntity.object3D = mesh;
-      nodeEntity.addComponent(SpatialNodeTag, { nodeIndex: i });
+      nodeEntity.addComponent(SpatialNodeTag);
       nodeEntity.addComponent(RayInteractable);
       nodeEntity.addComponent(PokeInteractable);
       nodeEntity.addComponent(OneHandGrabbable);
