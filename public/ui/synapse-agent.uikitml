@@ -1,0 +1,104 @@
+<style>
+  .panel-root {
+    flex-direction: column;
+    width: 460px;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .eyebrow {
+    color: #10b981;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+
+  .title {
+    color: #f8fafc;
+    font-size: 22px;
+    font-weight: 800;
+  }
+
+  .metric-card {
+    flex-direction: column;
+    gap: 8px;
+    background-color: #064e3b;
+    border-radius: 10px;
+    padding: 12px;
+    border-color: #059669;
+    border-width: 1px;
+  }
+
+  .metric-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .metric-title {
+    color: #a7f3d0;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .metric-val {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .telemetry-log {
+    flex-direction: column;
+    gap: 6px;
+    background-color: #022c22;
+    border-radius: 8px;
+    padding: 10px;
+    max-height: 200px;
+  }
+
+  .log-entry {
+    color: #6ee7b7;
+    font-size: 11px;
+    line-height: 16px;
+    font-family: fira-code;
+  }
+
+  .export-btn {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+  }
+</style>
+
+<Panel class="panel-root">
+  <div class="eyebrow">AGENTIC REASONING RUNTIME</div>
+  <div class="title">Synapse Telemetry</div>
+
+  <div class="metric-card">
+    <div class="metric-row">
+      <div class="metric-title">COGNITIVE LOAD (FLOW STATE)</div>
+      <div id="cognitive-load-val" class="metric-val">34% (BALANCED)</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-title">SPATIAL ENVELOPE COMPLIANCE</div>
+      <div class="metric-val">100% (2FT AIRPLANE RADIUS)</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-title">HAND TRACKING CONFIDENCE</div>
+      <div class="metric-val">99.8% (ISDK OPTIMIZED)</div>
+    </div>
+  </div>
+
+  <div class="telemetry-log">
+    <div class="log-entry">> [AGENT INIT] Synapse core initialized at seated horizon.</div>
+    <div class="log-entry">> [ISDK] Hand tracking pinch heuristics active.</div>
+    <div class="log-entry">> [SPATIAL] Curved cylinder layout projected (r=0.62m).</div>
+    <div id="latest-agent-log" class="log-entry">> [STATUS] Standing by for user cognitive dump.</div>
+  </div>
+
+  <Button id="btn-export-audit" class="export-btn" style="background-color: #059669">
+    <ButtonIcon><CircleCheck></CircleCheck></ButtonIcon>
+    <ButtonLabel>Export Structured Workflow Plan</ButtonLabel>
+  </Button>
+</Panel>

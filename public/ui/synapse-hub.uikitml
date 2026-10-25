@@ -1,0 +1,203 @@
+<style>
+  .panel-root {
+    flex-direction: column;
+    width: 520px;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .header-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .title-group {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .eyebrow {
+    color: #38bdf8;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+
+  .title {
+    color: #f8fafc;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 28px;
+  }
+
+  .badge-container {
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .status-badge {
+    background-color: #0369a1;
+    color: #e0f2fe;
+    font-size: 11px;
+    font-weight: 700;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 6px;
+  }
+
+  .card-section {
+    flex-direction: column;
+    gap: 8px;
+    background-color: #0f172a;
+    border-radius: 12px;
+    padding: 12px;
+    border-width: 1px;
+    border-color: #1e293b;
+  }
+
+  .section-label {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .task-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e293b;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .task-text {
+    color: #f1f5f9;
+    font-size: 14px;
+    font-weight: 600;
+    flex-grow: 1;
+  }
+
+  .task-meta {
+    color: #38bdf8;
+    font-size: 11px;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  .action-grid {
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .action-btn {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    height: 42px;
+  }
+
+  .btn-label {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .timer-banner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e1b4b;
+    border-color: #4338ca;
+    border-width: 1px;
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .timer-text {
+    color: #a5b4fc;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .timer-clock {
+    color: #38bdf8;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+</style>
+
+<Panel class="panel-root">
+  <div class="header-row">
+    <div class="title-group">
+      <div class="eyebrow">AUTONOMOUS SPATIAL WORKSPACE</div>
+      <div class="title">SynapseDesk AI</div>
+    </div>
+    <div class="badge-container">
+      <div class="status-badge">AIRPLANE SEAT 2FT</div>
+      <div class="status-badge" style="background-color: #065f46; color: #a7f3d0">HANDS-FIRST</div>
+    </div>
+  </div>
+
+  <div class="timer-banner">
+    <div class="timer-text">One Bus Stop Sprint Mode (10m Max)</div>
+    <div id="sprint-timer" class="timer-clock">05:00</div>
+    <Button id="btn-timer-toggle" class="action-btn" style="width: 90px; height: 32px">
+      <ButtonLabel class="btn-label" id="btn-timer-label">Start</ButtonLabel>
+    </Button>
+  </div>
+
+  <div class="card-section">
+    <div class="section-label">ACTIVE 3D SPATIAL NODES IN REACH</div>
+    <div class="task-row">
+      <div class="task-meta">[P1 URGENT]</div>
+      <div class="task-text">Meta XR Hand Physics & Interaction SDK Hook</div>
+      <Button id="btn-done-1" class="action-btn" style="width: 70px; height: 28px">
+        <ButtonLabel class="btn-label">Done</ButtonLabel>
+      </Button>
+    </div>
+    <div class="task-row">
+      <div class="task-meta">[P2 STRATEGY]</div>
+      <div class="task-text">Ergonomic Curved Arc Clustering Algorithm</div>
+      <Button id="btn-done-2" class="action-btn" style="width: 70px; height: 28px">
+        <ButtonLabel class="btn-label">Done</ButtonLabel>
+      </Button>
+    </div>
+    <div class="task-row">
+      <div class="task-meta">[P3 AI AGENT]</div>
+      <div class="task-text">Autonomous Multi-Step Intent Decomposer</div>
+      <Button id="btn-done-3" class="action-btn" style="width: 70px; height: 28px">
+        <ButtonLabel class="btn-label">Done</ButtonLabel>
+      </Button>
+    </div>
+  </div>
+
+  <div class="action-grid">
+    <Button id="btn-autocluster" class="action-btn">
+      <ButtonIcon><Zap></Zap></ButtonIcon>
+      <ButtonLabel class="btn-label">Auto-Cluster (2ft)</ButtonLabel>
+    </Button>
+    <Button id="btn-synthesize" class="action-btn">
+      <ButtonIcon><Sparkles></Sparkles></ButtonIcon>
+      <ButtonLabel class="btn-label">Agent Synthesize</ButtonLabel>
+    </Button>
+  </div>
+
+  <div class="action-grid">
+    <Button id="xr-button" class="action-btn" style="background-color: #0284c7">
+      <ButtonIcon><RectangleGoggles></RectangleGoggles></ButtonIcon>
+      <ButtonLabel class="btn-label">Enter XR (Hands-First)</ButtonLabel>
+    </Button>
+    <Button id="exit-button" class="action-btn" style="display: none; background-color: #475569">
+      <ButtonIcon><LogIn></LogIn></ButtonIcon>
+      <ButtonLabel class="btn-label">Exit to Browser</ButtonLabel>
+    </Button>
+  </div>
+</Panel>

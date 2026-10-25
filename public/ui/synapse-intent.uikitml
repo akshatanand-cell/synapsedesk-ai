@@ -1,0 +1,99 @@
+<style>
+  .panel-root {
+    flex-direction: column;
+    width: 440px;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .eyebrow {
+    color: #a855f7;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+
+  .title {
+    color: #f8fafc;
+    font-size: 22px;
+    font-weight: 800;
+  }
+
+  .desc {
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .intent-box {
+    flex-direction: column;
+    gap: 6px;
+    background-color: #0f172a;
+    border-radius: 10px;
+    padding: 12px;
+    border-width: 1px;
+    border-color: #334155;
+  }
+
+  .intent-label {
+    color: #c084fc;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .intent-text {
+    color: #f8fafc;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+
+  .preset-section {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .preset-btn {
+    width: 100%;
+    justify-content: flex-start;
+    height: 40px;
+    padding-left: 12px;
+  }
+
+  .btn-label {
+    font-size: 13px;
+    font-weight: 600;
+  }
+</style>
+
+<Panel class="panel-root">
+  <div class="eyebrow">COGNITIVE CAPTURE & PROMPTS</div>
+  <div class="title">Goal Synthesizer</div>
+  <div class="desc">
+    Tap or voice-dictate messy ambitions. Synapse AI autonomously decomposes them into actionable 3D nodes.
+  </div>
+
+  <div class="intent-box">
+    <div class="intent-label">ACTIVE INTENT IN BUFFER</div>
+    <div id="current-intent-text" class="intent-text">
+      "Architect and ship the Meta VR Start Competition submission with hands-first 60 FPS compliance."
+    </div>
+  </div>
+
+  <div class="preset-section">
+    <div class="desc" style="font-weight: 700; color: #cbd5e1">PRESET HIGH-IMPACT SESSIONS</div>
+    <Button id="btn-preset-vr" class="preset-btn">
+      <ButtonIcon><Sparkles></Sparkles></ButtonIcon>
+      <ButtonLabel class="btn-label">Horizon Store Launch Plan</ButtonLabel>
+    </Button>
+    <Button id="btn-preset-exam" class="preset-btn">
+      <ButtonIcon><Brain></Brain></ButtonIcon>
+      <ButtonLabel class="btn-label">Deep Study Sprint (Quantum Systems)</ButtonLabel>
+    </Button>
+    <Button id="btn-preset-opt" class="preset-btn">
+      <ButtonIcon><Zap></Zap></ButtonIcon>
+      <ButtonLabel class="btn-label">60 FPS VR Latency Optimization</ButtonLabel>
+    </Button>
+  </div>
+</Panel>
