@@ -1,17 +1,372 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="SynapseDesk AI: Hands-First Autonomous Spatial Cognition Engine for Meta VR" />
-    <link rel="icon" href="data:," />
-    <title>SynapseDesk AI — Autonomous Spatial Workspace Protocol</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="SynapseDesk AI: Hands-First Autonomous Spatial Cognition Engine for Meta VR Start Developer Competition 2026" />
+    <meta name="theme-color" content="#0a0d14" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230284c7'/><circle cx='50' cy='50' r='20' fill='%2338bdf8'/></svg>" />
+    <title>SynapseDesk AI — Autonomous Spatial Workspace Protocol | Meta VR 2026</title>
+    <style>
+      :root {
+        --bg-deep: #07090e;
+        --bg-card: rgba(15, 23, 42, 0.75);
+        --border-glass: rgba(56, 189, 248, 0.2);
+        --cyan-glow: #38bdf8;
+        --purple-glow: #a855f7;
+        --text-primary: #f8fafc;
+        --text-muted: #94a3b8;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      body {
+        background-color: var(--bg-deep);
+        color: var(--text-primary);
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-image: 
+          radial-gradient(circle at 50% 10%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
+          radial-gradient(circle at 80% 40%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+      }
+      #scene-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .app-wrapper {
+        position: relative;
+        z-index: 10;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 24px 60px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 48px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: -0.02em;
+      }
+      .brand-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: var(--cyan-glow);
+        box-shadow: 0 0 12px var(--cyan-glow);
+      }
+      .badge-competition {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: rgba(56, 189, 248, 0.1);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        border-radius: 9999px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--cyan-glow);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .hero {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      h1 {
+        font-size: 52px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, #ffffff 30%, var(--cyan-glow) 70%, var(--purple-glow) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .subtitle {
+        font-size: 20px;
+        color: var(--text-muted);
+        max-width: 780px;
+        margin: 0 auto 32px;
+        line-height: 1.5;
+      }
+      .cta-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+        margin-bottom: 48px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 26px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 12px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: none;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+        color: #ffffff;
+        box-shadow: 0 0 24px rgba(2, 132, 199, 0.45);
+        border: 1px solid rgba(56, 189, 248, 0.5);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 32px rgba(2, 132, 199, 0.7);
+      }
+      .btn-secondary {
+        background: rgba(30, 41, 59, 0.8);
+        color: #e2e8f0;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        backdrop-filter: blur(8px);
+      }
+      .btn-secondary:hover {
+        background: rgba(51, 65, 85, 0.9);
+        border-color: rgba(56, 189, 248, 0.4);
+        transform: translateY(-2px);
+      }
+      .video-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-glass);
+        border-radius: 20px;
+        padding: 16px;
+        margin-bottom: 48px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(12px);
+      }
+      .video-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px 14px;
+        font-size: 14px;
+        color: var(--text-muted);
+      }
+      .video-wrapper {
+        position: relative;
+        padding-top: 56.25%; /* 16:9 */
+        border-radius: 12px;
+        overflow: hidden;
+        background: #000;
+      }
+      .video-wrapper video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 48px;
+      }
+      .feature-card {
+        background: var(--bg-card);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 24px;
+        backdrop-filter: blur(10px);
+        transition: border-color 0.2s ease;
+      }
+      .feature-card:hover {
+        border-color: var(--border-glass);
+      }
+      .feature-icon {
+        font-size: 28px;
+        margin-bottom: 14px;
+      }
+      .feature-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #f1f5f9;
+      }
+      .feature-desc {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+      .toast {
+        display: none;
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(15, 23, 42, 0.95);
+        border: 1px solid var(--cyan-glow);
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        max-width: 500px;
+        width: 90%;
+        z-index: 100;
+        backdrop-filter: blur(16px);
+      }
+      .toast-title {
+        font-weight: 700;
+        font-size: 15px;
+        color: var(--cyan-glow);
+        margin-bottom: 4px;
+      }
+      .toast-msg {
+        font-size: 13px;
+        line-height: 1.4;
+        color: #cbd5e1;
+      }
+      footer {
+        text-align: center;
+        font-size: 13px;
+        color: #64748b;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      @media (max-width: 768px) {
+        h1 { font-size: 34px; }
+        .subtitle { font-size: 16px; }
+      }
+    </style>
   </head>
-  <body style="margin: 0">
+  <body>
+    <!-- Immersive Web SDK WebXR 3D Scene Root -->
     <div id="scene-container"></div>
+
+    <div class="app-wrapper">
+      <header>
+        <div class="brand">
+          <div class="brand-dot"></div>
+          <span>SynapseDesk AI</span>
+        </div>
+        <div class="badge-competition">
+          Meta VR Start Developer Competition 2026
+        </div>
+      </header>
+
+      <section class="hero">
+        <h1>Autonomous Spatial Workspace Protocol</h1>
+        <p class="subtitle">
+          Engineered for Meta Quest with official Immersive Web SDK. Hands-first seated cylindrical ergonomics, 
+          autonomous cognitive agent decomposition, and procedural audio focus sprints.
+        </p>
+
+        <div class="cta-bar">
+          <button id="enter-vr-btn" class="btn btn-primary" onclick="handleEnterVR()">
+            🥽 Launch WebXR VR Cockpit
+          </button>
+          <a href="#demo-video" class="btn btn-secondary">
+            ▶ Watch 1080p Demo Video
+          </a>
+          <a href="./SynapseDesk_AI_Executive_Whitepaper.pdf" target="_blank" class="btn btn-secondary">
+            📄 Executive Whitepaper (PDF)
+          </a>
+          <a href="https://github.com/akshatanand-cell/synapsedesk-ai" target="_blank" class="btn btn-secondary">
+            💻 GitHub Repository
+          </a>
+        </div>
+      </section>
+
+      <!-- 1080p Video Showcase -->
+      <section id="demo-video" class="video-card">
+        <div class="video-card-header">
+          <strong>Full Demonstration Video (1080p 60fps &bull; 2m 45s)</strong>
+          <span>Studio Voiceover &bull; Burned-In Captions</span>
+        </div>
+        <div class="video-wrapper">
+          <video controls preload="metadata" poster="./thumbnail.png">
+            <source src="./SynapseDesk_AI_Demo_Video.mp4" type="video/mp4" />
+            Your browser does not support high-definition HTML5 video playback.
+          </video>
+        </div>
+      </section>
+
+      <!-- 3 Judging Pillars Breakdown -->
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">✈️</div>
+          <div class="feature-title">The Airplane Seat Test</div>
+          <div class="feature-desc">
+            Constructed within a strict 2-foot (0.55m) seated radius. Zero room boundaries, zero head flailing, 
+            and zero neck fatigue. All interactive surfaces occupy a comfortable 40° FOV eye corridor.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🖐️</div>
+          <div class="feature-title">Hands-First Interaction</div>
+          <div class="feature-desc">
+            100% controller-free ergonomics. Direct PokeInteractable index finger actuation and OneHandGrabbable 
+            spatial prism manipulation, powered by Meta IWSDK physics workers.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <div class="feature-title">Agentic Cognition &amp; Sprints</div>
+          <div class="feature-desc">
+            Autonomous multi-tier goal decomposition, spring-repulsion 3D task clustering, and 5-minute micro-sprints 
+            synchronized with a custom Web Audio procedural synthesis engine.
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        SynapseDesk AI &bull; Built with Meta Immersive Web SDK (@iwsdk/core v1.1.0-rc.2) &bull; Submitted for Best Productivity App ($70,000) &amp; Best Agentic Interaction ($25,000)
+      </footer>
+    </div>
+
+    <!-- Toast Notification for Desktop Browsers -->
+    <div id="toast" class="toast">
+      <div class="toast-title" id="toast-title">WebXR Status</div>
+      <div class="toast-msg" id="toast-msg"></div>
+    </div>
+
+    <!-- Application Initialization Script -->
     <script type="module" src="/src/index.ts"></script>
+    <script>
+      async function handleEnterVR() {
+        const toast = document.getElementById('toast');
+        const title = document.getElementById('toast-title');
+        const msg = document.getElementById('toast-msg');
+
+        if (typeof window.enterSynapseVR === 'function') {
+          const res = await window.enterSynapseVR();
+          if (!res.success) {
+            title.textContent = "Meta Quest Headset Recommended";
+            msg.textContent = res.reason || "Please open https://synapsedesk-ai.vercel.app directly inside your Meta Quest Browser for full hands-first VR immersion.";
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 6000);
+          }
+        } else {
+          title.textContent = "Engine Initializing";
+          msg.textContent = "Spatial World is loading. If using Meta Quest, wait 2 seconds and tap Launch again.";
+          toast.style.display = 'block';
+          setTimeout(() => { toast.style.display = 'none'; }, 4000);
+        }
+      }
+    </script>
   </body>
 </html>
