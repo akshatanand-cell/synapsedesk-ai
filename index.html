@@ -277,6 +277,9 @@
           <button id="enter-vr-btn" class="btn btn-primary" onclick="handleEnterVR()">
             🥽 Launch WebXR VR Cockpit
           </button>
+          <a href="?view=cockpit" class="btn btn-secondary">
+            🌐 Explore 3D Seated Cockpit
+          </a>
           <a href="#demo-video" class="btn btn-secondary">
             ▶ Watch 1080p Demo Video
           </a>
@@ -347,6 +350,14 @@
     <!-- Application Initialization Script -->
     <script type="module" src="/src/index.ts"></script>
     <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('view') === 'cockpit') {
+        const wrapper = document.querySelector('.app-wrapper');
+        if (wrapper) wrapper.style.display = 'none';
+        const sceneEl = document.getElementById('scene-container');
+        if (sceneEl) sceneEl.style.pointerEvents = 'auto';
+        document.body.style.background = '#06080e';
+      }
       async function handleEnterVR() {
         const toast = document.getElementById('toast');
         const title = document.getElementById('toast-title');
