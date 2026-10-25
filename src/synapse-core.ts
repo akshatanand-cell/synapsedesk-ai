@@ -24,8 +24,8 @@ import {
 import { agentEngine } from './agent.js';
 import { sound } from './audio.js';
 
-export const SynapseCoreTag = createComponent({});
-export const SpatialNodeTag = createComponent({
+export const SynapseCoreTag = createComponent('SynapseCoreTag', {});
+export const SpatialNodeTag = createComponent('SpatialNodeTag', {
   nodeIndex: { type: 'number', default: 0 },
 });
 
