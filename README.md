@@ -29,7 +29,7 @@ Traditional VR productivity applications overwhelm users with floating 2D deskto
 | :--- | :--- | :--- |
 | **Hands-First Test** | Fully usable with hands end-to-end. Can someone complete the experience without controllers? | **100% Controller-Free.** Powered by Meta IWSDK Hand Tracking, `PokeInteractable` finger physics, and `OneHandGrabbable` pinch mechanics. |
 | **Airplane Seat Test** | Seated stationary use in a 2-foot diameter bubble. | Ergonomic curved cylindrical cockpit ($r = 0.55\text{m}$, angle $\pm 28^\circ$) directly within fingertip reach without leaning forward. |
-| **One Bus Stop Test** | Satisfying milestone in $\le 10$ minutes with fast cold start. | Instant WebXR launch with zero APK install delays; 5-minute focused Sprint Timer with structured output export. |
+| **One Bus Stop Test** | Satisfying milestone in $\le 10$ minutes with fast cold start. | Instant WebXR launch with zero APK install delays via Vercel (`https://synapsedesk-ai.vercel.app/`); 5-minute focused Sprint Timer with structured output export. |
 | **Take-It-Away Test** | Original entrant-built core; not a thin external API wrapper. | Entrant-authored spatial agentic state machine, force-directed auto-clustering physics, Web Audio synthesizer, and custom Horizon UIKitML layouts. |
 | **Performance Target** | Minimum 60+ FPS lock on Meta Quest hardware. | Procedurally batched Three.js r185 primitives, WebAssembly Havok physics, zero heavy external GLTF download latency. |
 
@@ -109,7 +109,7 @@ npm run dev
 
 ### Testing on Meta Quest 3 / Quest 3S:
 1. Open the **Meta Quest Browser** in your headset.
-2. Navigate to your local IP address (or the hosted Vercel deployment URL).
+2. Navigate to the live Vercel URL: **[https://synapsedesk-ai.vercel.app/](https://synapsedesk-ai.vercel.app/)** (or GitHub Pages mirror).
 3. Tap **"Enter XR (Hands-First)"** on the central panel.
 4. Put your controllers down — use your hands directly:
    - **Pinch & Move:** Grab any of the floating 3D task prisms.

@@ -148,7 +148,8 @@ def generate_pdf():
 
     # Links
     story.append(Paragraph("5. Verification & Live URLs", h2_style))
-    story.append(Paragraph("• <b>Live WebXR Application:</b> https://akshatanand-cell.github.io/synapsedesk-ai/", body_style))
+    story.append(Paragraph("• <b>Live WebXR Application (Vercel):</b> https://synapsedesk-ai.vercel.app/", body_style))
+    story.append(Paragraph("• <b>Mirror Deployment (GitHub Pages):</b> https://akshatanand-cell.github.io/synapsedesk-ai/", body_style))
     story.append(Paragraph("• <b>Public Code Repository:</b> https://github.com/akshatanand-cell/synapsedesk-ai", body_style))
     story.append(Paragraph("• <b>Developer / Entrant:</b> Akshat Anand (Meta VR Start Program Member)", body_style))
 

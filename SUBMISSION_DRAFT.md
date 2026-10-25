@@ -26,7 +26,8 @@ Use this document to fill out the Devpost Submission Form for the **Meta VR Star
 ### 2. URLs & Links
 
 * **Working Demo / Hosted WebXR Application URL:**
-  `https://akshatanand-cell.github.io/synapsedesk-ai/`
+  `https://synapsedesk-ai.vercel.app/`
+  *(Mirror: https://akshatanand-cell.github.io/synapsedesk-ai/)*
 
 * **Public Code Repository URL:**
   `https://github.com/akshatanand-cell/synapsedesk-ai`
@@ -37,7 +38,7 @@ Hardware Compatibility: Meta Quest 3, Meta Quest 3S, or Chrome Desktop WebXR Sim
 
 Steps to Test:
 1. Put on your Meta Quest headset (or launch Chrome with Immersive Web Emulator extension).
-2. Open Meta Quest Browser and navigate to: https://akshatanand-cell.github.io/synapsedesk-ai/
+2. Open Meta Quest Browser and navigate to: https://synapsedesk-ai.vercel.app/
 3. Tap "Enter XR (Hands-First)" on the central curved dashboard.
 4. Put your controllers aside — this application is 100% controller-free and hands-first:
    - Seated Ergonomics (The Airplane Seat Test): All interactive elements are situated in an ergonomic curved arc strictly within a 2-foot reach radius (r = 0.55m).
