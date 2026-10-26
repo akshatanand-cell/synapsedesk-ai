@@ -173,7 +173,7 @@ def move_hand(page, x, y, duration=1.0, click=False):
         time.sleep(0.15)
         page.mouse.down()
         page.evaluate(f"window.updateReticle({x}, {y}, true)")
-        time.sleep(0.2)
+        time.sleep(0.25)
         page.mouse.up()
         page.evaluate(f"window.updateReticle({x}, {y}, false)")
     time.sleep(duration)
@@ -190,6 +190,7 @@ def record():
                 "--window-size=1920,1080"
             ]
         )
+        context_start = time.time()
         context = browser.new_context(
             record_video_dir=RAW_VIDEO_DIR,
             record_video_size={"width": 1920, "height": 1080},
@@ -199,10 +200,17 @@ def record():
 
         print(f"[RECORDER] Navigating to {VERCEL_URL}...")
         page.goto(VERCEL_URL, wait_until="networkidle", timeout=60000)
-        time.sleep(4.0)
+        
+        # Generous warm-up to ensure 3D WebGL scene and UIKitML panels are fully compiled and rendered
+        print("[RECORDER] Waiting for 3D shaders and panels to stabilize...")
+        time.sleep(6.0)
         
         inject_hud(page)
-        time.sleep(1.0)
+        time.sleep(1.5)
+
+        # Mark exact offset timestamp where Act 1 begins (trims all loading/blank frames)
+        demo_start_offset = time.time() - context_start
+        print(f"[RECORDER] Ready! Demo begins at offset {demo_start_offset:.2f}s (loading trimmed)")
 
         # -------------------------------------------------------------
         # ACT 1: Seated Airplane Seat Ergonomics (Duration: ~33.0s)
@@ -211,15 +219,15 @@ def record():
         act1_start = time.time()
         page.evaluate("window.updateHUDAct('ACT 01 // ERGONOMICS', 'The Airplane Seat Test: 2-Foot Curved Cockpit (r=0.55m)')")
         
-        # Smooth camera gaze traverse across the 3 cockpit panels
-        move_hand(page, 960, 540, 2.5)   # Center Hub
-        move_hand(page, 620, 520, 3.0)   # Left Intent Panel
-        move_hand(page, 1300, 520, 3.0)  # Right Agent Panel
-        move_hand(page, 960, 480, 2.5)   # Back to Center
-        move_hand(page, 960, 380, 3.0)   # Central Focus Timer
-        move_hand(page, 750, 600, 2.5)
-        move_hand(page, 1170, 600, 2.5)
-        move_hand(page, 960, 540, 2.0)
+        # Smooth camera gaze traverse across the 3 balanced cockpit panels
+        move_hand(page, 960, 500, 2.5)   # Center Hub
+        move_hand(page, 580, 480, 3.0)   # Left Intent Panel
+        move_hand(page, 1340, 480, 3.0)  # Right Agent Panel
+        move_hand(page, 960, 440, 2.5)   # Back to Center
+        move_hand(page, 960, 350, 3.0)   # Central Focus Timer
+        move_hand(page, 780, 560, 2.5)
+        move_hand(page, 1140, 560, 2.5)
+        move_hand(page, 960, 500, 2.0)
         
         elapsed = time.time() - act1_start
         if elapsed < 33.0:
@@ -233,21 +241,21 @@ def record():
         page.evaluate("window.updateHUDAct('ACT 02 // HANDS-FIRST PHYSICS', 'Zero-Controller PokeInteractable Finger Physics')")
 
         # Focus left Cognitive Capture panel
-        move_hand(page, 620, 420, 2.5)
+        move_hand(page, 580, 420, 2.5)
         
         # Poke preset: Horizon Store Launch Plan
         print("Poking Horizon Store Launch Plan...")
-        move_hand(page, 620, 480, 1.5, click=True)
+        move_hand(page, 580, 480, 1.5, click=True)
         time.sleep(2.5)
 
         # Poke preset: Quantum Systems Protocol
         print("Poking Quantum Systems Protocol...")
-        move_hand(page, 620, 520, 1.5, click=True)
+        move_hand(page, 580, 520, 1.5, click=True)
         time.sleep(2.5)
 
         # Poke preset: 60 FPS VR Latency Optimization
         print("Poking 60 FPS Latency Optimization...")
-        move_hand(page, 620, 560, 1.5, click=True)
+        move_hand(page, 580, 560, 1.5, click=True)
         time.sleep(3.0)
 
         # Poke Synthesize Autonomous Workflow
@@ -255,7 +263,7 @@ def record():
         move_hand(page, 890, 615, 2.0, click=True)
         time.sleep(4.0)
 
-        move_hand(page, 620, 450, 3.0)
+        move_hand(page, 580, 450, 3.0)
         elapsed = time.time() - act2_start
         if elapsed < 37.0:
             time.sleep(37.0 - elapsed)
@@ -340,9 +348,9 @@ def record():
         page.evaluate("window.updateHUDAct('ACT 05 // ARCHITECTURE', 'Meta Immersive Web SDK (@iwsdk/core) & Production Deployment')")
 
         # Wide cinematic overview
-        move_hand(page, 960, 540, 4.0)
-        move_hand(page, 960, 460, 5.0)
-        move_hand(page, 960, 540, 5.0)
+        move_hand(page, 960, 500, 4.0)
+        move_hand(page, 960, 440, 5.0)
+        move_hand(page, 960, 500, 5.0)
 
         elapsed = time.time() - act5_start
         if elapsed < 29.0:
@@ -353,16 +361,16 @@ def record():
         raw_video_path = page.video.path()
         print(f"[RECORDER] Raw video saved to: {raw_video_path}")
         browser.close()
-        return raw_video_path
+        return str(raw_video_path), demo_start_offset
 
-def mux_final_video(raw_webm_path):
-    print("[FFMPEG] Muxing 1080p video with studio voiceover and burned-in subtitles...")
-    # Convert backslashes for ffmpeg filter
+def mux_final_video(raw_webm_path, start_offset):
+    print(f"[FFMPEG] Trimming {start_offset:.2f}s of loading frames and muxing with studio voiceover & subtitles...")
     escaped_srt = SUBTITLES_PATH.replace("\\", "/").replace(":", "\\:")
     
     ffmpeg_cmd = [
         "ffmpeg", "-y",
-        "-i", raw_webm_path,
+        "-ss", f"{start_offset:.2f}",
+        "-i", str(raw_webm_path),
         "-i", VOICEOVER_PATH,
         "-vf", f"subtitles='{escaped_srt}':force_style='FontSize=22,FontName=Arial,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BackColour=&H80000000,BorderStyle=4,MarginV=42'",
         "-c:v", "libx264",
@@ -375,7 +383,7 @@ def mux_final_video(raw_webm_path):
         OUTPUT_VIDEO_PATH
     ]
     
-    print("Running:", " ".join(ffmpeg_cmd))
+    print("Running ffmpeg command...")
     subprocess.run(ffmpeg_cmd, check=True)
     print(f"[FFMPEG] Master Demo Video successfully created at: {OUTPUT_VIDEO_PATH}")
 
@@ -385,6 +393,6 @@ def mux_final_video(raw_webm_path):
     print(f"[COPIED] Copied to public folder: {PUBLIC_VIDEO_PATH}")
 
 if __name__ == "__main__":
-    raw_path = record()
-    mux_final_video(raw_path)
-    print("ALL DONE! 11/10 MASTER DEMO VIDEO GENERATED!")
+    raw_path, offset = record()
+    mux_final_video(raw_path, offset)
+    print("ALL DONE! 11/10 MASTER DEMO VIDEO GENERATED WITH ZERO BLANK FRAMES!")
