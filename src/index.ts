@@ -52,10 +52,10 @@ World.create(
   purpleFillLight.position.set(-1.5, 2.0, 1.0);
   world.scene.add(purpleFillLight);
 
-  // Position browser camera directly in seated user eye-line
+  // Position browser camera directly in seated user eye-line with balanced wide cockpit framing
   if (world.camera) {
-    world.camera.position.set(0, 1.25, 0.05);
-    world.camera.lookAt(new Vector3(0, 1.15, -0.65));
+    world.camera.position.set(0, 1.30, 0.55);
+    world.camera.lookAt(new Vector3(0, 1.18, -0.65));
   }
 
   world.registerSystem(RobotSystem);
